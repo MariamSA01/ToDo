@@ -28,6 +28,8 @@ export async function fetchTodos(){
 }
 
 export function deleteTodoFB(id: string){
-    console.log("deleteTodo",id);
     return axios.delete(BACKEND_URL+`/toDo/${id}.json`);
+}
+export function updateTodoFB(id: string, toDoData:todo ){
+    return axios.put(BACKEND_URL+`/toDo/${id}.json`, toDoData);
 }
