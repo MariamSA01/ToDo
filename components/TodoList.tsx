@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TodoItem from './TodoItem';
 import { fetchTodos } from '../util/https';
-
-
-type Todo = {
-    id: string;
-    title: string;
-    completed: boolean;
-  };
+import { addTodo } from '../redux/todoSlice';
 
 const TodoList = () => {
-//   const todos = useSelector((state: any) => state.todos.todos);
-  const [fetchedTodos, setFetchedTodos] = useState<Todo[]>([])
+  const todos = useSelector((state: any) => state.todos.todos);
+    const dispatch = useDispatch();
 
   useEffect(()=>{
     async function getTodo(){
-        const todos = await fetchTodos()
-        setFetchedTodos(todos)
+        const fetchedTodos = await fetchTodos()
+        fetchedTodos.forEach(todo =>{
+            dispatch(addTodo(todo))
+        })
     }
     getTodo()
-  },[])
+  },[dispatch])
 
   return (
     <View>
       <FlatList 
-        data={fetchedTodos}
+        data={todos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <TodoItem todo={item} />}
       />
