@@ -3,6 +3,7 @@ import { View, TextInput, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { addTodo } from '../redux/todoSlice';
+import { storeToDo } from '../util/https';
 
 const TodoForm = () => {
   const [title, setTitle] = useState('');
@@ -10,6 +11,7 @@ const TodoForm = () => {
 
   const handleAddTodo = () => {
     if (title.trim()) {
+      storeToDo({title, completed:false});
       dispatch(addTodo({
         id: Date.now(),
         title,
