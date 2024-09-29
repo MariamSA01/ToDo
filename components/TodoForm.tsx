@@ -10,10 +10,11 @@ const TodoForm = () => {
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
+
     if (title.trim()) {
       storeToDo({title, completed:false});
       dispatch(addTodo({
-        id: Date.now(),
+        id: Date.now().toString(),
         title,
         completed: false,
       }));
