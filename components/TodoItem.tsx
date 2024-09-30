@@ -14,7 +14,6 @@ interface TodoItemProps {
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     const dispatch = useDispatch();
     async function handleDelete (){
-        console.log('deleteeee', todo.id)
         await deleteTodoFB(todo.id);
         dispatch(deleteTodo(todo.id));
       };
@@ -33,16 +32,22 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     </View>
   );
 };
-const style = StyleSheet.create({
-    container:{
-        padding: 10,
-        marginTop:10,
-        marginHorizontal: 10,
-        backgroundColor: '#c2c2d6',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        alignItems: 'center',
 
+  const style = StyleSheet.create({
+    container: {
+      padding: 10,
+      marginTop: 10,
+      marginHorizontal: 10,
+      backgroundColor: '#D3D3D3',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderColor: '#000000',
+      borderWidth: 1,
+      borderRadius: 8,
     },
-})
+
+
+  });
+
 export default TodoItem;

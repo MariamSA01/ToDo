@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import TodoItem from './TodoItem';
 import { fetchTodos } from '../util/https';
@@ -20,7 +20,7 @@ const TodoList = () => {
   },[dispatch])
 
   return (
-    <View>
+    <View style={styles.listContainer}>
       <FlatList 
         data={todos}
         keyExtractor={(item) => item.id.toString()}
@@ -29,5 +29,13 @@ const TodoList = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  listContainer: {
+    backgroundColor: '#F0F0F0', // Gray background for the todo list
+    flex: 1,
+    paddingVertical: 10,
+  }
+});
 
 export default TodoList;
