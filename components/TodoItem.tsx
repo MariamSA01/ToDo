@@ -3,7 +3,7 @@ import { View, Text, Button } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { deleteTodo, completedItem } from '../redux/todoSlice';
-import {deleteTodoFB} from '../util/https'
+import {deleteTodoFB, updateTodoFB} from '../util/https'
 
 
 interface TodoItemProps {
@@ -18,9 +18,10 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
         await deleteTodoFB(todo.id);
         dispatch(deleteTodo(todo.id));
       };
-    const onCompletedPress = () => {
+      async function onCompletedPress(){
         dispatch(completedItem({ ...todo, completed: !todo.completed }));
-    };
+        await updateTodoFB(todo.id, { ...todo, completed: !todo.completed})
+      }
     
   return (
     <View style={style.container}>
