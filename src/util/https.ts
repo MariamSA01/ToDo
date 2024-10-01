@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Todo } from '../components/TodoItem';
 
 interface todo{
     title: string;
@@ -15,7 +16,7 @@ export function storeToDo(toDoData:todo){
 
 export async function fetchTodos(){
    const response = await axios.get(BACKEND_URL+'/toDo.json')
-   const todo = [];
+   const todo:Todo[] = [];
    for(let key in response.data){
     const todoObj={
         id: key,
