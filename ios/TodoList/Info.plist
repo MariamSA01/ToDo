@@ -40,6 +40,19 @@
 	<array>
 		<string>arm64</string>
 	</array>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLName</key>
+		<string>com.org.reactjs.native.example.TodoList</string> <!-- Replace with your bundle ID -->
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>myapp</string> <!-- This is the URL scheme you set for deep linking -->
+		</array>
+	</dict>
+	</array>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -4,13 +4,14 @@ import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { deleteTodo, completedItem } from '../redux/todoSlice';
 import {deleteTodoFB, updateTodoFB} from '../util/https'
-
-
-interface TodoItemProps {
-  todo: { id: string; title: string; completed: boolean; };
+ 
+ 
+export type Todo = { id: string; title: string; completed: boolean; };
+type TodoItemProps = {
+  todo: Todo;
 }
-
-
+ 
+ 
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     const dispatch = useDispatch();
     async function handleDelete (){
@@ -23,16 +24,16 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       }
     
   return (
-    <View style={style.container}>
-      <Text style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }}>
+    <View style={style.container} testID='todoItem'>
+      <Text style={todo.completed ? style.completed : style.uncompleted} testID="title">
         {todo.title}
       </Text>
-      <Button title="Completed" onPress={onCompletedPress} />
-      <Button title="Delete" onPress={handleDelete} />
+      <Button title="Completed" onPress={onCompletedPress} testID='completedButton' />
+      <Button title="Delete" onPress={handleDelete} testID='deleteButton' />
     </View>
   );
 };
-
+ 
   const style = StyleSheet.create({
     container: {
       padding: 10,
@@ -46,8 +47,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       borderWidth: 1,
       borderRadius: 8,
     },
-
-
+    completed: {
+      textDecorationLine: 'line-through'
+    },
+    uncompleted: {
+      textDecorationLine: 'none'
+    }
   });
-
+ 
 export default TodoItem;
